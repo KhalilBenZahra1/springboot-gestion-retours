@@ -37,6 +37,13 @@ public class RetourProduitService {
     }
 
     public RetourProduit createRetour(RetourProduit retourProduit) {
+
+        // Définir automatiquement la date actuelle
+        retourProduit.setDate(LocalDate.now());
+
+        // Définir automatiquement l'état initial
+        retourProduit.setEtatTraitement("En attente");
+
         RetourProduit saved = retourProduitRepository.save(retourProduit);
 
         HistoriqueRetour historique = new HistoriqueRetour();
@@ -44,6 +51,7 @@ public class RetourProduitService {
         historique.setAction("Création du retour");
         historique.setEmploye("Système");
         historique.setDate(LocalDate.now());
+
         historiqueRetourRepository.save(historique);
 
         return saved;
@@ -57,8 +65,8 @@ public class RetourProduitService {
         retour.setClient(details.getClient());
         retour.setRaison(details.getRaison());
         retour.setEtatTraitement(details.getEtatTraitement());
-        retour.setDate(details.getDate());
 
+        
         RetourProduit updated = retourProduitRepository.save(retour);
 
         HistoriqueRetour historique = new HistoriqueRetour();
@@ -86,6 +94,14 @@ public class RetourProduitService {
         RetourProduit retour = retourProduitRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Retour produit introuvable avec l'id : " + id));
 
+        if ("Traité".equals(retour.getEtatTraitement())) {
+            throw new RuntimeException("Un retour traité ne peut pas être revalidé.");
+        }
+
+        if ("Validé".equals(retour.getEtatTraitement())) {
+            throw new RuntimeException("Ce retour est déjà validé.");
+        }
+
         retour.setEtatTraitement("Validé");
         RetourProduit saved = retourProduitRepository.save(retour);
 
@@ -103,11 +119,19 @@ public class RetourProduitService {
         RetourProduit retour = retourProduitRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Retour produit introuvable avec l'id : " + id));
 
+        if ("Traité".equals(retour.getEtatTraitement())) {
+            throw new RuntimeException("Ce retour est déjà traité.");
+        }
+
+        if (!"Validé".equals(retour.getEtatTraitement())) {
+            throw new RuntimeException("Seul un retour validé peut être traité.");
+        }
+
+        StockProduit stock = stockProduitRepository.findByProduit(retour.getProduit())
+                .orElseThrow(() -> new RuntimeException("Aucun stock trouvé pour le produit : " + retour.getProduit()));
+
         retour.setEtatTraitement("Traité");
         RetourProduit saved = retourProduitRepository.save(retour);
-
-        StockProduit stock = stockProduitRepository.findByProduit(saved.getProduit())
-                .orElseThrow(() -> new RuntimeException("Aucun stock trouvé pour le produit : " + saved.getProduit()));
 
         stock.setQuantite(stock.getQuantite() + 1);
         stockProduitRepository.save(stock);
