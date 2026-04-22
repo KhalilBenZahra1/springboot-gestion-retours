@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   mysql:
     image: mysql:8.0
@@ -25,6 +23,16 @@ services:
       - "8080:8080"
     environment:
       SPRING_PROFILES_ACTIVE: docker
+
+  frontend:
+    build:
+      context: "C:/Users/GIGABYTE/Desktop/2GL-A/semestre2/Spring Boot/gestion-retours-frontend"
+    container_name: gestionretours-frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "8081:80"
 
 volumes:
   mysql_data:
