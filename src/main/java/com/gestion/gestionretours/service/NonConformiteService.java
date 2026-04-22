@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.time.LocalDate;
 
 @Service
 public class NonConformiteService {
@@ -25,6 +26,7 @@ public class NonConformiteService {
     }
 
     public NonConformite createNonConformite(NonConformite nonConformite) {
+        nonConformite.setDate(LocalDate.now());
         return nonConformiteRepository.save(nonConformite);
     }
 
@@ -34,12 +36,11 @@ public class NonConformiteService {
 
         nc.setDescription(details.getDescription());
         nc.setGravite(details.getGravite());
-        nc.setDate(details.getDate());
         nc.setProduit(details.getProduit());
 
         return nonConformiteRepository.save(nc);
     }
-
+    
     public void deleteNonConformite(Long id) {
         nonConformiteRepository.deleteById(id);
     }
