@@ -1,6 +1,7 @@
 package com.gestion.gestionretours.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @Entity
@@ -11,12 +12,15 @@ public class RetourProduit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Le produit est obligatoire.")
     @Column(nullable = false)
     private String produit;
 
+    @NotBlank(message = "Le client est obligatoire.")
     @Column(nullable = false)
     private String client;
 
+    @NotBlank(message = "La raison est obligatoire.")
     @Column(nullable = false)
     private String raison;
 

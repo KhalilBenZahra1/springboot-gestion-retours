@@ -1,6 +1,8 @@
 package com.gestion.gestionretours.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "utilisateur")
@@ -10,12 +12,16 @@ public class Utilisateur {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Le nom est obligatoire.")
     @Column(nullable = false)
     private String nom;
 
+    @NotBlank(message = "L'email est obligatoire.")
+    @Email(message = "Le format de l'email est invalide.")
     @Column(nullable = false, unique = true)
     private String email;
 
+    @NotBlank(message = "Le rôle est obligatoire.")
     @Column(nullable = false)
     private String role;
 

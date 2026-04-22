@@ -1,6 +1,9 @@
 package com.gestion.gestionretours.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "stock_produit")
@@ -10,9 +13,12 @@ public class StockProduit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Le produit est obligatoire.")
     @Column(nullable = false, unique = true)
     private String produit;
 
+    @NotNull(message = "La quantité est obligatoire.")
+    @Min(value = 0, message = "La quantité ne peut pas être négative.")
     @Column(nullable = false)
     private Integer quantite;
 

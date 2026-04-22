@@ -15,18 +15,17 @@ import java.util.Optional;
 @Service
 public class RetourProduitService {
 
-	private final RetourProduitRepository retourProduitRepository;
-	private final HistoriqueRetourRepository historiqueRetourRepository;
-	private final StockProduitRepository stockProduitRepository;
-    
+    private final RetourProduitRepository retourProduitRepository;
+    private final HistoriqueRetourRepository historiqueRetourRepository;
+    private final StockProduitRepository stockProduitRepository;
 
-	public RetourProduitService(RetourProduitRepository retourProduitRepository,
-					            HistoriqueRetourRepository historiqueRetourRepository,
-					            StockProduitRepository stockProduitRepository) {
-		this.retourProduitRepository = retourProduitRepository;
-		this.historiqueRetourRepository = historiqueRetourRepository;
-		this.stockProduitRepository = stockProduitRepository;
-	}
+    public RetourProduitService(RetourProduitRepository retourProduitRepository,
+                                HistoriqueRetourRepository historiqueRetourRepository,
+                                StockProduitRepository stockProduitRepository) {
+        this.retourProduitRepository = retourProduitRepository;
+        this.historiqueRetourRepository = historiqueRetourRepository;
+        this.stockProduitRepository = stockProduitRepository;
+    }
 
     public List<RetourProduit> getAllRetours() {
         return retourProduitRepository.findAll();
@@ -38,10 +37,7 @@ public class RetourProduitService {
 
     public RetourProduit createRetour(RetourProduit retourProduit) {
 
-        // Définir automatiquement la date actuelle
         retourProduit.setDate(LocalDate.now());
-
-        // Définir automatiquement l'état initial
         retourProduit.setEtatTraitement("En attente");
 
         RetourProduit saved = retourProduitRepository.save(retourProduit);
@@ -64,9 +60,7 @@ public class RetourProduitService {
         retour.setProduit(details.getProduit());
         retour.setClient(details.getClient());
         retour.setRaison(details.getRaison());
-        retour.setEtatTraitement(details.getEtatTraitement());
 
-        
         RetourProduit updated = retourProduitRepository.save(retour);
 
         HistoriqueRetour historique = new HistoriqueRetour();
