@@ -4,6 +4,7 @@ import { Utilisateurs } from './pages/utilisateurs/utilisateurs';
 import { Retours } from './pages/retours/retours';
 import { NonConformites } from './pages/non-conformites/non-conformites';
 import { Stock } from './pages/stock/stock';
+import { Historique } from './pages/historique/historique';
 
 export const routes: Routes = [
 
@@ -25,6 +26,11 @@ export const routes: Routes = [
   {
   path: 'stock',
   component: Stock
+  },
+
+  {
+  path: 'historique',
+    component: Historique
   },
 
   {

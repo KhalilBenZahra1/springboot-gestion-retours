@@ -1,0 +1,47 @@
+<div class="container">
+
+  <h1>Historique des traitements</h1>
+
+  <table>
+
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Produit</th>
+        <th>Client</th>
+        <th>Employé</th>
+        <th>Action</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let historique of historiques">
+
+        <td>{{ historique.id }}</td>
+
+        <td>{{ historique.retour?.produit }}</td>
+
+        <td>{{ historique.retour?.client }}</td>
+
+        <td>{{ historique.employe?.nom }}</td>
+
+        <td>{{ historique.action }}</td>
+
+        <td>{{ historique.date }}</td>
+
+        <td>
+          <button (click)="supprimerHistorique(historique.id)">
+            Supprimer
+          </button>
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
