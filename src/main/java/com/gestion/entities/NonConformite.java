@@ -21,7 +21,7 @@ public class NonConformite {
 	private int id;
 
 	@NotBlank(message = "La description est obligatoire")
-	private String description;
+	private String description;	
 
 	@NotBlank(message = "La gravité est obligatoire")
 	private String gravite;
@@ -32,4 +32,5 @@ public class NonConformite {
 	@ManyToOne
 	@JoinColumn(name = "idRetourProduit")
 	private RetourProduit produit;
+	
 }

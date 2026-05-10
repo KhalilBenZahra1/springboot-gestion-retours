@@ -85,6 +85,10 @@ public class RetourProduitService {
 
 			retourProduit.setEtatTraitement("NON_REINTEGRE");
 
+		} else if (decision.equals("NON_CONFORME")) {
+
+			retourProduit.setEtatTraitement("NON_CONFORME");
+
 		} else {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
 					"Décision invalide");
@@ -102,7 +106,6 @@ public class RetourProduitService {
 
 		return ResponseEntity.ok("Retour produit traité avec succès");
 	}
-	
 
 	public ResponseEntity<String> mettreAJourRetourProduit(int idRetourProduit,
 			RetourProduit retourProduitModifie) {

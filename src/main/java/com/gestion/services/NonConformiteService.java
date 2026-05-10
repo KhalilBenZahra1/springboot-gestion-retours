@@ -49,6 +49,7 @@ public class NonConformiteService {
 				() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Retour produit non trouvé avec cet ID"));
 
 		nonConformite.setProduit(retourProduit);
+		
 		ncREP.save(nonConformite);
 
 		return ResponseEntity.ok("Non-conformité ajoutée avec succès");

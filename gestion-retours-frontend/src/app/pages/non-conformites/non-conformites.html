@@ -1,0 +1,35 @@
+<div class="container">
+
+  <h1>Liste des retours non conformes</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Produit</th>
+        <th>Client</th>
+        <th>Raison</th>
+        <th>État</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let retour of retoursNonConformes">
+        <td>{{ retour.id }}</td>
+        <td>{{ retour.produit }}</td>
+        <td>{{ retour.client }}</td>
+        <td>{{ retour.raison }}</td>
+        <td>{{ retour.etatTraitement }}</td>
+        <td>{{ retour.date }}</td>
+        <td>
+          <button (click)="supprimerRetourNonConforme(retour.id)">
+            Supprimer
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

@@ -1,0 +1,65 @@
+<div class="container">
+
+  <h1>Gestion des utilisateurs</h1>
+
+  <form class="formulaire" (ngSubmit)="enregistrerUtilisateur()">
+
+    <input
+      type="text"
+      placeholder="Nom"
+      name="nom"
+      [(ngModel)]="utilisateur.nom"
+      required
+    >
+
+    <input
+      type="email"
+      placeholder="Email"
+      name="email"
+      [(ngModel)]="utilisateur.email"
+      required
+    >
+
+    <select name="role" [(ngModel)]="utilisateur.role" required>
+      <option value="">Choisir un rôle</option>
+      <option value="ADMIN">ADMIN</option>
+      <option value="EMPLOYE">EMPLOYE</option>
+      <option value="QUALITE">QUALITE</option>
+    </select>
+
+    <button type="submit">
+      {{ modeModification ? 'Modifier' : 'Ajouter' }}
+    </button>
+
+    <button type="button" (click)="viderFormulaire()">
+      Annuler
+    </button>
+
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let utilisateur of utilisateurs">
+        <td>{{ utilisateur.id }}</td>
+        <td>{{ utilisateur.nom }}</td>
+        <td>{{ utilisateur.email }}</td>
+        <td>{{ utilisateur.role }}</td>
+        <td>
+          <button (click)="modifierUtilisateur(utilisateur)">Modifier</button>
+          <button (click)="supprimerUtilisateur(utilisateur.id)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

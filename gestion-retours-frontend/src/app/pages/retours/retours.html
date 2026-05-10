@@ -1,0 +1,90 @@
+<div class="container">
+
+  <h1>Gestion des retours produits</h1>
+
+  <form class="formulaire" (ngSubmit)="enregistrerRetour()">
+
+    <input type="text" placeholder="Produit" name="produit" [(ngModel)]="retour.produit" required>
+
+    <input type="text" placeholder="Client" name="client" [(ngModel)]="retour.client" required>
+
+    <input type="text" placeholder="Raison" name="raison" [(ngModel)]="retour.raison" required>
+
+    <input name="etatTraitement" [(ngModel)]="retour.etatTraitement" required readonly>
+
+    <button type="submit">
+      {{ modeModification ? 'Modifier' : 'Ajouter' }}
+    </button>
+
+    <button type="button" (click)="viderFormulaire()">
+      Annuler
+    </button>
+
+  </form>
+
+  <h2>Traitement des retours</h2>
+
+  <div class="formulaire">
+
+    <select name="utilisateurTraitement" [(ngModel)]="idUtilisateurSelectionne">
+      <option [ngValue]="undefined">Choisir un utilisateur</option>
+
+      <option
+        *ngFor="let utilisateur of utilisateurs"
+        [ngValue]="utilisateur.id"
+        [hidden]="utilisateur.role !== 'QUALITE'"
+      >
+        {{ utilisateur.nom }} - {{ utilisateur.role }}
+      </option>
+    </select>
+
+    <select name="decisionTraitement" [(ngModel)]="decisionSelectionnee">
+      <option value="">Choisir une décision</option>
+      <option value="REINTEGRE_STOCK">REINTEGRE_STOCK</option>
+      <option value="REFUSE">REFUSE</option>
+      <option value="NON_REINTEGRE">NON_REINTEGRE</option>
+      <option value="NON_CONFORME">NON_CONFORME</option>
+    </select>
+
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Produit</th>
+        <th>Client</th>
+        <th>Raison</th>
+        <th>État</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let retour of retours">
+        <td>{{ retour.id }}</td>
+        <td>{{ retour.produit }}</td>
+        <td>{{ retour.client }}</td>
+        <td>{{ retour.raison }}</td>
+        <td>{{ retour.etatTraitement }}</td>
+        <td>{{ retour.date }}</td>
+        <td>
+          <button (click)="modifierRetour(retour)">Modifier</button>
+
+          <button (click)="supprimerRetour(retour.id)">
+            Supprimer
+          </button>
+
+          <button
+            (click)="traiterRetour(retour.id)"
+            [disabled]="retour.etatTraitement !== 'EN_ATTENTE'"
+          >
+            Traiter
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

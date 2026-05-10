@@ -1,0 +1,56 @@
+<div class="container">
+
+  <h1>Gestion du stock</h1>
+
+  <form class="formulaire" (ngSubmit)="enregistrerStock()">
+
+    <input
+      type="text"
+      placeholder="Produit"
+      name="produit"
+      [(ngModel)]="stockProduit.produit"
+      required
+    >
+
+    <input
+      type="number"
+      placeholder="Quantité"
+      name="quantite"
+      [(ngModel)]="stockProduit.quantite"
+      required
+      min="0"
+    >
+
+    <button type="submit">
+      {{ modeModification ? 'Modifier' : 'Ajouter' }}
+    </button>
+
+    <button type="button" (click)="viderFormulaire()">
+      Annuler
+    </button>
+
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Produit</th>
+        <th>Quantité</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let stock of stocks">
+        <td>{{ stock.id }}</td>
+        <td>{{ stock.produit }}</td>
+        <td>{{ stock.quantite }}</td>
+        <td>
+          <button (click)="modifierStock(stock)">Modifier</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
