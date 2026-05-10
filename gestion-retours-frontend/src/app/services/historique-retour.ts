@@ -9,7 +9,7 @@ import { HistoriqueRetour } from '../models/historique-retour';
 })
 export class HistoriqueRetourService {
 
-  private apiUrl = 'http://localhost:8080/historiqueRetour';
+  private apiUrl = '/api/historiqueRetour';
 
   constructor(private http: HttpClient) {}
 

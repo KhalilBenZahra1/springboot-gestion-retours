@@ -8,7 +8,7 @@ import { Utilisateur } from '../models/utilisateur';
 })
 export class UtilisateurService {
 
-  private apiUrl = 'http://localhost:8080/utilisateur';
+  private apiUrl = '/api/utilisateur';
 
   constructor(private http: HttpClient) {}
 

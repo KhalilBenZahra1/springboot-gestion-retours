@@ -8,7 +8,7 @@ import { RetourProduit } from '../models/retour-produit';
 })
 export class RetourProduitService {
 
-  private apiUrl = 'http://localhost:8080/retourProduit';
+  private apiUrl = '/api/retourProduit';
 
   constructor(private http: HttpClient) {}
 

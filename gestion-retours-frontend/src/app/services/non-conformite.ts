@@ -8,7 +8,7 @@ import { NonConformite } from '../models/non-conformite';
 })
 export class NonConformiteService {
 
-  private apiUrl = 'http://localhost:8080/nonConformite';
+  private apiUrl = '/api/nonConformite';
 
   constructor(private http: HttpClient) {}
 

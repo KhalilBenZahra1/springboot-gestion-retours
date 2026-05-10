@@ -26,7 +26,7 @@ services:
 
   frontend:
     build:
-      context: "C:/Users/GIGABYTE/Desktop/2GL-A/semestre2/Spring Boot/gestion-retours-frontend"
+      context: ./gestion-retours-frontend
     container_name: gestionretours-frontend
     restart: always
     depends_on:

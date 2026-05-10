@@ -9,7 +9,7 @@ import { StockProduit } from '../models/stock-produit';
 })
 export class StockProduitService {
 
-  private apiUrl = 'http://localhost:8080/stockProduit';
+  private apiUrl = '/api/stockProduit';
 
   constructor(private http: HttpClient) {}
 
